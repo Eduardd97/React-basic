@@ -3,15 +3,15 @@ import React, { useState } from "react";
 export const LoginForm = () => {
     // two-way-binding
 
-    // Завдання:
-    // Додати state для password input у компоненті LoginForm
-    const [email, setEmail] = useState("");
+    // const [email, setEmail] = useState("");
 
-    const [password, setPassword] = useState("");
+    // const [password, setPassword] = useState("");
+
+    const [formData, setFormData] = useState({ email: "", password: "" });
 
     const onSubmit = () => {
-        console.log("Email", `${email}`);
-        console.log("Paswword", `${password}`);
+        console.log("Email", `${formData.email}`);
+        console.log("Paswword", `${formData.password}`);
     };
 
     // console.log(email);
@@ -21,14 +21,18 @@ export const LoginForm = () => {
             <input
                 type='text'
                 placeholder='email'
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={formData.email}
+                onChange={(event) =>
+                    setFormData({ ...formData, email: event.target.value })
+                }
             />
             <input
                 type='password'
                 placeholder='password'
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                value={formData.password}
+                onChange={(event) =>
+                    setFormData({ ...formData, password: event.target.value })
+                }
             />
             <button onClick={onSubmit}>Submit</button>
         </div>
