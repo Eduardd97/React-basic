@@ -1,6 +1,9 @@
-/* .red {
-    background: red;
+.red {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+/* 
 .cout-increase {
     cursor: pointer;
 } */
