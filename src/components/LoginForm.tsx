@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, {FC, useState } from "react";
 
-export const LoginForm = () => {
+type Props = {
+    email: string;
+    password: string;
+};
+
+export const LoginForm: FC<Props> = ({ email, password }) => {
     // two-way-binding
 
     // const [email, setEmail] = useState("");
 
     // const [password, setPassword] = useState("");
 
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState({ email, password });
 
     const onSubmit = () => {
         console.log("Email", `${formData.email}`);

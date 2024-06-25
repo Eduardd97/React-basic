@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const Counter = () => {
     // let count: number = 0;
@@ -26,8 +26,23 @@ export const Counter = () => {
     const changeCounter = (newCount: number) => setCount(newCount);
 
     const resetCount = () => {
-        setCount(0)
-    }
+        setCount(0);
+    };
+
+    useEffect(() => {
+        if (count > 10) {
+            setCount(0);
+        }
+        console.log(`Count has been changed: ${count}`);
+    }, [count]);
+
+    //  Завдання:
+    //  Відсідковувати, коли count буде менше за 0
+    //  У такому випадку - поверати його до значення 5
+
+    useEffect(() => {
+        if(count < 0) setCount(5);
+    }, [count])
 
     return (
         <div>
