@@ -7,6 +7,7 @@ const App = () => {
         { title: "Login page", path: "/login" },
         { title: "Counter page", path: "/counter" },
         { title: "User Profile", path: "user-profile" },
+        { title: "Users List", path: "/users-list"}
     ];
 
     const user = {
