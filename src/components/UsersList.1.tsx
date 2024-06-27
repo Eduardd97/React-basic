@@ -1,10 +1,16 @@
-import React, { FC } from "react";
-// import { Props, Users } from "../types";
+import React, { FC, useEffect } from "react";
 import { UsersProps } from "../types";
+import { client } from "../axios";
 
 
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
+
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        client
+    }, [])
+
     return (
         <div>
             <h2>List of Users</h2>
