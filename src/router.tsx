@@ -5,6 +5,7 @@ import App from "./App";
 import { UserProfile } from "./components/UserProfile";
 import { UsersList } from "./components/UsersList.1";
 import { users } from "./const";
+import { Users } from "./components/Users";
 
 export const router = createBrowserRouter([
     {
@@ -32,8 +33,10 @@ export const router = createBrowserRouter([
     },
     {
         path: "/users-list",
-        element: (
-            <UsersList users = {users} />
-        ),
+        element: <UsersList users={users} />,
+    },
+    {
+        path: "/users",
+        element: <Users />,
     },
 ]);

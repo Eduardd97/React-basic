@@ -5,7 +5,15 @@ export type Users = {
   age: number;
 };
 
-export type UsersProps = {
-    users: Users[]
+export type APIUserType = {
+  email: string;
+  name: string;
+  phone: string;
 }
 
+export type UserVariationsType = 'local' | 'server';
+
+
+export type UsersProps = {
+  users: Users[] |  APIUserType []
+}

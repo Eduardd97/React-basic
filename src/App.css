@@ -3,7 +3,11 @@
     flex-direction: column;
     gap: 20px;
 }
-/* 
-.cout-increase {
-    cursor: pointer;
-} */
+
+.active-tab {
+    background: lightblue;
+}
+
+.tab {
+    background: white;
+}

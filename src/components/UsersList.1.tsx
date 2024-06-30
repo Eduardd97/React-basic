@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from "react";
 import { UsersProps } from "../types";
-import { client } from "../axios";
+// import { client } from "../axios";
 
 
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
 
-    useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        client
-    }, [])
+    // useEffect(() => {
+    //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    //     client
+    // }, [])
 
     return (
         <div>
@@ -18,7 +18,6 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                 {users.map((user, index) => (
                     <li key={index}>
                         <p>Name: {user.name}</p>
-                        <p>Age: {user.age}</p>
                         <p>Email: {user.email}</p>
                     </li>
                 ))}
