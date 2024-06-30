@@ -6,6 +6,7 @@ import { UserProfile } from "./components/UserProfile";
 import { UsersList } from "./components/UsersList.1";
 import { users } from "./const";
 import { Users } from "./components/Users";
+import { Todos } from "./components/Todos";
 
 export const router = createBrowserRouter([
     {
@@ -38,5 +39,9 @@ export const router = createBrowserRouter([
     {
         path: "/users",
         element: <Users />,
+    },
+    {
+        path: "/todos",
+        element: <Todos />,
     },
 ]);

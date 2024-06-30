@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "./App.css";
 import { UserProfile } from "./components/UserProfile";
-import { Users } from "./components/Users";
 
 const App = () => {
     const headerRoutes = [
@@ -9,7 +8,8 @@ const App = () => {
         { title: "Counter page", path: "/counter" },
         { title: "User Profile", path: "user-profile" },
         { title: "Users List", path: "/users-list"},
-        { title: "Users", path: "/users"}
+        { title: "Users", path: "/users"},
+        { title: "Todos", path: "/todos"}
     ];
 
     const user = {
