@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import "./App.css";
 import { UserProfile } from "./components/UserProfile";
-import { title } from "process";
-import path from "path";
 
 const App = () => {
     const headerRoutes = [

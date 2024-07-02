@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersList } from "./UsersList.1";
-
-import { client } from "../axios";
 import { UserVariationsType } from "../types";
 import { AppContext } from "../contexts/AppContext";
 import { users } from "../const";
