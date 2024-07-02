@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UsersList } from "./UsersList.1";
-import { users } from "../const";
+
 import { client } from "../axios";
-import { APIUserType, UserVariationsType } from "../types";
+import { UserVariationsType } from "../types";
+import { AppContext } from "../contexts/AppContext";
+import { users } from "../const";
 
 export const Users = () => {
     const [usersType, setUsersType] = useState<UserVariationsType>("local");
     const userTypes: UserVariationsType[] = ["local", "server"];
 
-    const [serverUsers, setServerUsers] = useState<APIUserType[]>([]);
+    const { users: serverUsers, setUsers } = useContext(AppContext);
+
+    // const [serverUsers, setServerUsers] = useState<APIUserType[]>([]);
 
     const changeUserType = (userType: UserVariationsType) =>
         setUsersType(userType);
 
     useEffect(() => {
-        client.get("/users").then(({ data }) => setServerUsers(data));
-    }, []);
+        // client.get("/users").then(({ data }) => setUsers && setUsers(data));
+    }, [setUsers]);
 
     // if (usersType === "Lokal") return <UsersList users={users} />;
 

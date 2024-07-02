@@ -7,6 +7,7 @@ import { UsersList } from "./components/UsersList.1";
 import { users } from "./const";
 import { Users } from "./components/Users";
 import { Todos } from "./components/Todos";
+import { UserForm } from "./components/UserForm";
 
 export const router = createBrowserRouter([
     {
@@ -43,5 +44,9 @@ export const router = createBrowserRouter([
     {
         path: "/todos",
         element: <Todos />,
+    },
+    {
+        path: "/user-create",
+        element: <UserForm />,
     },
 ]);

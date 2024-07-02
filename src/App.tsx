@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "./App.css";
 import { UserProfile } from "./components/UserProfile";
+import { title } from "process";
+import path from "path";
 
 const App = () => {
     const headerRoutes = [
@@ -9,7 +11,8 @@ const App = () => {
         { title: "User Profile", path: "user-profile" },
         { title: "Users List", path: "/users-list"},
         { title: "Users", path: "/users"},
-        { title: "Todos", path: "/todos"}
+        { title: "Todos", path: "/todos"},
+        { title: "User Create", path: "/user-create"}
     ];
 
     const user = {
