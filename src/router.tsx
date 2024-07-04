@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Counter } from "./components/Counter";
 import { LoginForm } from "./components/LoginForm";
-import App from "./App";
 import { UserProfile } from "./components/UserProfile";
 import { UsersList } from "./components/UsersList.1";
 import { users } from "./const";
@@ -12,7 +11,12 @@ import { UserForm } from "./components/UserForm";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: (
+            <LoginForm
+                email='default-email@gmai.com'
+                password='default-password'
+            />
+        ),
     },
     {
         path: "/counter",
