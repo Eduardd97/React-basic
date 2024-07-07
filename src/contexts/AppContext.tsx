@@ -40,11 +40,14 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     };
 
     const deleteUser = (user: APIUserType | Users) => {
-        const updatedUsers = (users as Array<APIUserType>).filter(({ email }) => email !== user.email);
+        const updatedUsers = (users as Array<APIUserType>).filter(
+            ({ email }) => email !== user.email
+        );
 
         setUsers(updatedUsers as Array<APIUserType>);
         set("users", updatedUsers);
     };
+
     return (
         <AppContext.Provider
             value={{ users, setUsers, createUser, deleteUser }}

@@ -5,16 +5,20 @@ import { AppContext } from "../contexts/AppContext";
 
 export const UserForm = () => {
     const { createUser } = useContext(AppContext);
-    const [userData, setUserData] = useState<APIUserType>({
+
+    const initialState = {
         email: "",
         phone: "",
         name: "",
-    });
+    }
+
+    const [userData, setUserData] = useState<APIUserType>(initialState);
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        createUser && createUser(userData)
-    }
+        createUser && createUser(userData);
+        setUserData(initialState) // added logic to clear data after creating a new user
+    };
 
     return (
         <Container>

@@ -1,22 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Counter } from "./components/Counter";
 import { LoginForm } from "./components/LoginForm";
-import { UserProfile } from "./components/UserProfile";
+import { UserProfile } from "./components/UserProfieComponent/UserProfile";
 import { UsersList } from "./components/UsersList.1";
 import { users } from "./const";
 import { Users } from "./components/Users";
 import { Todos } from "./components/Todos";
 import { UserForm } from "./components/UserForm";
+import { ImageCarousel } from "./components/CarouselComponent/ImageCarousel";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: (
-            <LoginForm
-                email='default-email@gmai.com'
-                password='default-password'
-            />
-        ),
+        element: <ImageCarousel />,
     },
     {
         path: "/counter",

@@ -4,9 +4,9 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 export const Header = () => {
     const headerRoutes = [
         { title: "Login page", path: "/login" },
-        { title: "Counter page", path: "/counter" },
+        // { title: "Counter page", path: "/counter" },
         { title: "User Profile", path: "user-profile" },
-        { title: "Users List", path: "/users-list" },
+        { title: "Local Users List", path: "/users-list" },
         { title: "Users", path: "/users" },
         { title: "Todos", path: "/todos" },
         { title: "User Create", path: "/user-create" },
