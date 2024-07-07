@@ -3,7 +3,8 @@ import { UsersList } from "./UsersList.1";
 import { UserVariationsType } from "../../types";
 import { AppContext } from "../../contexts/AppContext";
 import { users } from "../../const";
-import './Users.css'
+import "./Users.css";
+import { Nav } from "react-bootstrap";
 
 export const Users = () => {
     const [usersType, setUsersType] = useState<UserVariationsType>("local");
@@ -23,8 +24,26 @@ export const Users = () => {
     // if (usersType === "Lokal") return <UsersList users={users} />;
 
     return (
-        <div className="users">
-            <nav>
+        <div className='users'>
+            <div className="user-variation-tabs">
+                {userTypes.map((type) => (
+                    <Nav variant='tabs'>
+                        <Nav.Item>
+                            <Nav.Link className={type === usersType ? "active-tab" : "tab"} onClick={() => changeUserType(type)}>
+                                {type.toUpperCase()}
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                ))}
+            </div>
+
+            <UsersList users={usersType === "local" ? users : serverUsers} />
+        </div>
+    );
+};
+
+{
+    /* <nav>
                 {userTypes.map((type) => (
                     <button
                         key={type}
@@ -34,8 +53,5 @@ export const Users = () => {
                         {type}
                     </button>
                 ))}
-            </nav>
-            <UsersList users={usersType === "local" ? users : serverUsers} />
-        </div>
-    );
-};
+            </nav> */
+}

@@ -2,9 +2,14 @@ import React, { FormEventHandler, useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { APIUserType } from "../../types";
 import { AppContext } from "../../contexts/AppContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const UserForm = () => {
-    const { createUser } = useContext(AppContext);
+    const { createUser, editUser } = useContext(AppContext);
+
+    const { email } = useParams();
+    const navigate = useNavigate();
+    const isEditMode = Boolean(email);
 
     const initialState = {
         email: "",
@@ -16,8 +21,16 @@ export const UserForm = () => {
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        createUser && createUser(userData);
+
+        if (isEditMode && email) {
+            editUser && editUser(email, userData);
+        } else {
+            createUser && createUser(userData);
+            
+        }
         setUserData(initialState); // added logic to clear data after creating a new user
+
+        navigate('/users');
     };
 
     return (

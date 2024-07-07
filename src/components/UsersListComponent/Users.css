@@ -6,6 +6,15 @@
     padding: 40px 0 0 0;
 }
 
+.user-variation-tabs {
+    display: flex;
+}
+
+.user-variation-tabs .nav-tabs .nav-item .active-tab {
+    color: whitesmoke;
+    background: black;
+}
+
 .users-list {
     display: flex;
     flex-direction: column;

@@ -1,19 +1,25 @@
 import React, { FC, useContext } from "react";
 import { UsersProps } from "../../types";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../contexts/AppContext";
-import './Users.css';
+import "./Users.css";
+import { useNavigate } from "react-router-dom";
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
     // useEffect(() => {
     //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     //     client
     // }, [])
+    const navigate = useNavigate()
 
     const { deleteUser } = useContext(AppContext);
 
+    const redirectToEditForm = (email: string) => {
+            navigate(`/user-create/${email}`);
+    }
+
     return (
-        <div className="users-list">
+        <div className='users-list'>
             <h2>List of Users</h2>
             <ul>
                 {users.map((user, index) => (
@@ -38,7 +44,11 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                                 >
                                     Delete
                                 </Button>
-                            )}
+                            )}{" "}
+                            {!("age" in user) && (
+                                <InputGroup.Checkbox onChange={() => redirectToEditForm(user.email)}></InputGroup.Checkbox>
+                            )}{" "}
+                            {!("age" in user) && <span>Edit User</span>}
                         </Card.Footer>
                     </Card>
                 ))}

@@ -16,6 +16,8 @@ type AppContextType = {
 
     deleteUser?: (user: APIUserType | Users) => void;
 
+    editUser?: (email: string, updateUserdData: APIUserType | Users) => void
+
     // addUser?: () =>
 };
 
@@ -24,6 +26,7 @@ export const AppContext = createContext<AppContextType>({
 });
 
 export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
+
     const { get, set } = useLocalStorage();
 
     const [users, setUsers] = useState<Users[] | APIUserType[]>(
@@ -48,9 +51,18 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         set("users", updatedUsers);
     };
 
+    const editUser = (email: string, updateUserdData: APIUserType | Users) => {
+        const updatedUsers = users.map(user => 
+            user.email === email ? { ...user, ...updateUserdData } : user
+        );
+
+        setUsers(updatedUsers as Array<APIUserType>);
+        set("users", updatedUsers);
+    }
+
     return (
         <AppContext.Provider
-            value={{ users, setUsers, createUser, deleteUser }}
+            value={{ users, setUsers, createUser, deleteUser, editUser }}
         >
             {children}
         </AppContext.Provider>
