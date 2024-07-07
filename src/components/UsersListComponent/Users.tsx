@@ -41,17 +41,3 @@ export const Users = () => {
         </div>
     );
 };
-
-{
-    /* <nav>
-                {userTypes.map((type) => (
-                    <button
-                        key={type}
-                        className={type === usersType ? "active-tab" : "tab"}
-                        onClick={() => changeUserType(type)}
-                    >
-                        {type}
-                    </button>
-                ))}
-            </nav> */
-}
