@@ -4,6 +4,7 @@ import { todosApi } from "../../axios";
 import { TodosList } from "./TodosList";
 import { todos } from "../../const";
 import './Todos.css'
+import { Nav } from "react-bootstrap";
 
 export const Todos = () => {
     const [todosType, setTodosType] = useState<TodoVariationsType>("local");
@@ -23,7 +24,18 @@ export const Todos = () => {
     return (
         <div className="todos">
             {" "}
-            <nav>
+            <div className="todos-variation-tabs">
+                {todoTypes.map((type) => (
+                    <Nav variant='tabs'>
+                        <Nav.Item>
+                            <Nav.Link className={type === todosType ? "active-tab" : "tab"} onClick={() => changeTodosType(type)}>
+                                {type.toUpperCase()}
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                ))}
+            </div>
+            {/* <nav>
                 {todoTypes.map((type) => (
                     <button
                         key={type}
@@ -33,7 +45,7 @@ export const Todos = () => {
                         {type}
                     </button>
                 ))}
-            </nav>
+            </nav> */}
             <TodosList
                 todos={todosType === "local" ? todos : serverTodos.slice(0, 50)}
             />

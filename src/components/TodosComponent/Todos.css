@@ -7,6 +7,15 @@
     gap: 40px;
 }
 
+.todos-variation-tabs {
+    display: flex;
+}
+
+.todos-variation-tabs .nav-tabs .nav-item .active-tab {
+    color: whitesmoke;
+    background: black;
+}
+
 .todos .todos-list {
     width: 90%;
     display: grid;
