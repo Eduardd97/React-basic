@@ -1,8 +1,8 @@
 import React, { FC, useContext } from "react";
-import { UsersProps } from "../types";
+import { UsersProps } from "../../types";
 import { Button, Card } from "react-bootstrap";
-import { AppContext } from "../contexts/AppContext";
-// import { client } from "../axios";
+import { AppContext } from "../../contexts/AppContext";
+import './Users.css';
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
     // useEffect(() => {
@@ -13,7 +13,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
     const { deleteUser } = useContext(AppContext);
 
     return (
-        <div>
+        <div className="users-list">
             <h2>List of Users</h2>
             <ul>
                 {users.map((user, index) => (

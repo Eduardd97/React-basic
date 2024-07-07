@@ -1,0 +1,24 @@
+.todos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 0 0;
+    gap: 40px;
+}
+
+.todos .todos-list {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(4, 2fr);
+    gap: 20px;
+}
+
+.todos .todos-list .todo-card .card {
+    width: 20rem;
+    height: 100%;
+}
+
+.title-completed {
+    background: tomato;
+}

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersList } from "./UsersList.1";
-import { UserVariationsType } from "../types";
-import { AppContext } from "../contexts/AppContext";
-import { users } from "../const";
+import { UserVariationsType } from "../../types";
+import { AppContext } from "../../contexts/AppContext";
+import { users } from "../../const";
+import './Users.css'
 
 export const Users = () => {
     const [usersType, setUsersType] = useState<UserVariationsType>("local");
@@ -22,7 +23,7 @@ export const Users = () => {
     // if (usersType === "Lokal") return <UsersList users={users} />;
 
     return (
-        <div>
+        <div className="users">
             <nav>
                 {userTypes.map((type) => (
                     <button

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { TodoVariationsType, TodosType } from "../types";
-import { todosApi } from "../axios";
+import { TodoVariationsType, TodosType } from "../../types";
+import { todosApi } from "../../axios";
 import { TodosList } from "./TodosList";
-import { todos } from "../const";
+import { todos } from "../../const";
+import './Todos.css'
 
 export const Todos = () => {
     const [todosType, setTodosType] = useState<TodoVariationsType>("local");
@@ -10,15 +11,17 @@ export const Todos = () => {
 
     const [serverTodos, setServerTodos] = useState<TodosType[]>([]);
 
-    const changeTodosType = (todoType: TodoVariationsType) => {setTodosType(todoType); console.log(serverTodos.slice(0, 50))} ;
+    const changeTodosType = (todoType: TodoVariationsType) => {
+        setTodosType(todoType);
+        console.log(serverTodos.slice(0, 50));
+    };
 
     useEffect(() => {
         todosApi.get("/todos").then(({ data }) => setServerTodos(data));
-        
     }, []);
 
     return (
-        <div>
+        <div className="todos">
             {" "}
             <nav>
                 {todoTypes.map((type) => (
@@ -31,7 +34,9 @@ export const Todos = () => {
                     </button>
                 ))}
             </nav>
-            <TodosList todos={todosType === "local" ? todos : serverTodos.slice(0, 50)} />
+            <TodosList
+                todos={todosType === "local" ? todos : serverTodos.slice(0, 50)}
+            />
         </div>
     );
 };

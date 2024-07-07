@@ -1,7 +1,7 @@
 import React, { FormEventHandler, useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { APIUserType } from "../types";
-import { AppContext } from "../contexts/AppContext";
+import { APIUserType } from "../../types";
+import { AppContext } from "../../contexts/AppContext";
 
 export const UserForm = () => {
     const { createUser } = useContext(AppContext);
@@ -10,14 +10,14 @@ export const UserForm = () => {
         email: "",
         phone: "",
         name: "",
-    }
+    };
 
     const [userData, setUserData] = useState<APIUserType>(initialState);
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         createUser && createUser(userData);
-        setUserData(initialState) // added logic to clear data after creating a new user
+        setUserData(initialState); // added logic to clear data after creating a new user
     };
 
     return (
