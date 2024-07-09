@@ -49,7 +49,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                             {!("age" in user) && (
                                 <InputGroup.Checkbox onChange={() => redirectToEditForm(user.email)}></InputGroup.Checkbox>
                             )}{" "}
-                            {!("age" in user) && <span>Edit User</span>}
+                            {!("age" in user) && <span className="title-checkbox">Edit User</span>}
                         </Card.Footer>
                     </Card>
                 ))}

@@ -28,3 +28,21 @@
     gap: 50px;
     padding: 0;
 }
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+.card-footer .input-group-text {
+    width: 50%;
+}
+
+.card-footer .title-checkbox {
+    position: absolute;
+    bottom: 13px;
+    left: 55px;
+}
+
