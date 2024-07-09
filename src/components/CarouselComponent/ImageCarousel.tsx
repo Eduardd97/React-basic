@@ -1,5 +1,6 @@
 import React from "react";
 import './ImageCarousel.css'
+import './mobileImageCarousel.css'
 import { Carousel } from "react-bootstrap";
 
 export const ImageCarousel = () => {

@@ -1,0 +1,23 @@
+@media (max-width: 450px) {
+    .carousel-inner .carousel-item .carousel-caption {
+        color: brown;
+    }
+
+    .carousel-inner .carousel-item .carousel-caption h3 {
+        font-size: 40px;
+    }
+
+    .carousel-inner .carousel-item .carousel-caption p {
+        font-size: 25px;
+    }
+
+    .carousel-control-prev .carousel-control-prev-icon, .carousel-control-next-icon {
+        display: none;
+    }
+
+
+    .carousel-caption {
+        right: 13%;
+        bottom: 10.25rem;
+    }
+}
