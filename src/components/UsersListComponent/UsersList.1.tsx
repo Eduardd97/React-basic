@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useRef } from "react";
 import { UsersProps } from "../../types";
 import { Button, Card, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../contexts/AppContext";
@@ -19,8 +19,15 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
             navigate(`/user-create/${email}`);
     }
 
+    const divRef = useRef<HTMLDivElement | null>(null);
+    
+    const userDataRef = useRef({name: "Eduard"});
+    console.log(userDataRef, "userDataRef");
+
+    // console.log(divRef.current?.innerHTML, "divRef");
+
     return (
-        <div className='users-list'>
+        <div className='users-list' ref={divRef}>
             <h2>List of Users</h2>
             <ul>
                 {users.map((user, index) => (
