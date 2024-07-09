@@ -1,15 +1,4 @@
-.red {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+* {
+    box-sizing: border-box;
 }
-
-.active-tab {
-    background: lightblue;
-}
-
-.tab {
-    background: white;
-}
-
 

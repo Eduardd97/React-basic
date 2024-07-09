@@ -1,5 +1,18 @@
 @media (max-width: 1000px) {
+    /* .bg-body-tertiary {
+        display: flex;
+        justify-content: center;
+    } */
+
     .navbar>.container {
         gap: 0;
+        /* margin-left: 0;
+        padding-left: 0; */
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar>.container {
+        padding-right: 25px;
     }
 }

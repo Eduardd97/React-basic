@@ -7,7 +7,7 @@ import "./Users.css";
 import { Nav } from "react-bootstrap";
 
 export const Users = () => {
-    const [usersType, setUsersType] = useState<UserVariationsType>("local");
+    const [usersType, setUsersType] = useState<UserVariationsType>("server");
     const userTypes: UserVariationsType[] = ["local", "server"];
 
     const { users: serverUsers, setUsers } = useContext(AppContext);

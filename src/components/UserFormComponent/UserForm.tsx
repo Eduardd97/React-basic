@@ -1,11 +1,13 @@
-import React, { FormEventHandler, useContext, useState } from "react";
+import React, { FormEventHandler, useContext, useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { APIUserType } from "../../types";
 import { AppContext } from "../../contexts/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
+import "./UserForm.css"
+import "./MobileUserForm.css"
 
 export const UserForm = () => {
-    const { createUser, editUser } = useContext(AppContext);
+    const { users, createUser, editUser } = useContext(AppContext);
 
     const { email } = useParams();
     const navigate = useNavigate();
@@ -18,6 +20,15 @@ export const UserForm = () => {
     };
 
     const [userData, setUserData] = useState<APIUserType>(initialState);
+
+    useEffect(() => {
+        if (isEditMode) {
+            const user = users.find((user) => user.email === email);
+            if (user) {
+                setUserData(user);
+            }
+        }
+    }, [email, users, isEditMode]);
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
@@ -72,10 +83,11 @@ export const UserForm = () => {
                                 email: event.target.value,
                             })
                         }
+                        disabled={isEditMode}
                     />
-
-                    <Button type='submit'>Create User</Button>
                 </Form.Group>
+
+                <Button className="form-button" type='submit'>{isEditMode ? 'Save Changes' : 'Create User'}</Button>
             </Form>
         </Container>
     );

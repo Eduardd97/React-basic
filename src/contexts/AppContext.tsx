@@ -5,18 +5,18 @@ import {
     createContext,
     useState,
 } from "react";
-import { APIUserType, Users } from "../types";
+import { APIUserType } from "../types";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type AppContextType = {
-    users: Users[] | APIUserType[];
-    setUsers?: Dispatch<Users[] | APIUserType[]>;
+    users: APIUserType[];
+    setUsers?: Dispatch<APIUserType[]>;
 
-    createUser?: (user: APIUserType | Users) => APIUserType | Users;
+    createUser?: (user: APIUserType) => APIUserType;
 
-    deleteUser?: (user: APIUserType | Users) => void;
+    deleteUser?: (user: APIUserType) => void;
 
-    editUser?: (email: string, updateUserdData: APIUserType | Users) => void
+    editUser?: (email: string, updateUserdData: APIUserType) => void
 
     // addUser?: () =>
 };
@@ -29,11 +29,11 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
     const { get, set } = useLocalStorage();
 
-    const [users, setUsers] = useState<Users[] | APIUserType[]>(
+    const [users, setUsers] = useState<APIUserType[]>(
         get("users") || []
     );
 
-    const createUser = (user: APIUserType | Users) => {
+    const createUser = (user: APIUserType) => {
         const updatedUsers = [...users, user];
 
         setUsers(updatedUsers as Array<APIUserType>);
@@ -42,7 +42,7 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         return user;
     };
 
-    const deleteUser = (user: APIUserType | Users) => {
+    const deleteUser = (user: APIUserType) => {
         const updatedUsers = (users as Array<APIUserType>).filter(
             ({ email }) => email !== user.email
         );
@@ -51,7 +51,7 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         set("users", updatedUsers);
     };
 
-    const editUser = (email: string, updateUserdData: APIUserType | Users) => {
+    const editUser = (email: string, updateUserdData: APIUserType) => {
         const updatedUsers = users.map(user => 
             user.email === email ? { ...user, ...updateUserdData } : user
         );

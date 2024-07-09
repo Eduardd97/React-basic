@@ -1,0 +1,13 @@
+.container {
+    padding: 25px 0 0 50px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.container form .form-button {
+    width: 50%
+}

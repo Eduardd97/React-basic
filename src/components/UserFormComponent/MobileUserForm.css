@@ -1,0 +1,17 @@
+@media (max-width: 650px) {
+    .form-control {
+        width: 450px
+    }
+}
+
+@media (max-width: 550px) {
+    .form-control {
+        width: 350px
+    }
+}
+
+@media (max-width: 450px) {
+    .form-control {
+        width: 250px
+    }
+}
