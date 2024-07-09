@@ -1,4 +1,4 @@
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
     .navbar>.container {
         gap: 0;
     }

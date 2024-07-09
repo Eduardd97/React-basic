@@ -23,6 +23,12 @@
     gap: 20px;
 }
 
+.todos .todos-list .todo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .todos .todos-list .todo-card .card {
     width: 20rem;
     height: 100%;

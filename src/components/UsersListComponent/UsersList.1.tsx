@@ -3,6 +3,7 @@ import { UsersProps } from "../../types";
 import { Button, Card, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../contexts/AppContext";
 import "./Users.css";
+import "./MobileUsers.css"
 import { useNavigate } from "react-router-dom";
 
 export const UsersList: FC<UsersProps> = ({ users }) => {

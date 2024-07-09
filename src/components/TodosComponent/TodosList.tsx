@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import "./Todos.css";
+import "./MobileTodos.css"
 import { TodosProps, TodosType } from "../../types";
 import { Card, InputGroup } from "react-bootstrap";
 
