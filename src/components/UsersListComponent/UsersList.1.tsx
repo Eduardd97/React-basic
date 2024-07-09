@@ -25,7 +25,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
             <ul>
                 {users.map((user, index) => (
                     <Card
-                        key={index}
+                        key={`${user.email}-${index}`}
                         className='mt-3'
                         style={{ width: "18rem" }}
                     >
