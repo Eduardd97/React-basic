@@ -1,9 +1,9 @@
-import React, { FC, useContext, useRef } from "react";
-import { UsersProps } from "../../types";
-import { Button, Card, InputGroup } from "react-bootstrap";
+import React, { FC, useContext, useRef, useState } from "react";
+import { APIUserType, UsersProps } from "../../types";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../contexts/AppContext";
 import "./Users.css";
-import "./MobileUsers.css"
+import "./MobileUsers.css";
 import { useNavigate } from "react-router-dom";
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
@@ -11,25 +11,67 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
     //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     //     client
     // }, [])
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const { deleteUser } = useContext(AppContext);
+    const { deleteUser, searchUser } = useContext(AppContext);
+
+    // useEffect(() => {
+    //     if (UserIsNotFound.current) {
+    //         UserIsNotFound.current.textContent = "User not found for this email address";
+    //     }
+    // }, []);
+
+    const [email, setEmail] = useState("");
+    const [foundUser, setFoundUser] = useState<APIUserType | null>(null);
+
+    const hideUsers = useRef<HTMLUListElement | null>(null);
+
+    const handleSearch = () => {
+        if (searchUser) {
+            const user = searchUser(email);
+            setFoundUser(user);
+
+            if (hideUsers.current) hideUsers.current.style.display = "none";
+        }
+    };
 
     const redirectToEditForm = (email: string) => {
-            navigate(`/user-create/${email}`);
-    }
+        navigate(`/user-create/${email}`);
+    };
 
     const divRef = useRef<HTMLDivElement | null>(null);
-    
-    const userDataRef = useRef({name: "Eduard"});
-    console.log(userDataRef, "userDataRef");
+
+    // const userDataRef = useRef({ name: "Eduard" });
+    // console.log(userDataRef, "userDataRef");
 
     // console.log(divRef.current?.innerHTML, "divRef");
+
+    // const UserIsNotFound = useRef<HTMLDivElement | null>(null);
+    // // UserIsNotFound.current?.textContent = "a"
 
     return (
         <div className='users-list' ref={divRef}>
             <h2>List of Users</h2>
-            <ul>
+
+            <InputGroup className='search-user-input mb-3'>
+                <Form.Control
+                    placeholder="Enter the user's email address"
+                    aria-label="Enter the user's email address"
+                    aria-describedby='basic-addon2'
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+                <Button
+                    variant='outline-secondary'
+                    id='button-addon2'
+                    onClick={handleSearch}
+                >
+                    Search
+                </Button>
+            </InputGroup>
+
+            {/* <div className="user-not-found">{foundUser}</div> */}
+
+            <ul ref={hideUsers}>
                 {users.map((user, index) => (
                     <Card
                         key={`${user.email}-${index}`}
@@ -54,13 +96,46 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                                 </Button>
                             )}{" "}
                             {!("age" in user) && (
-                                <InputGroup.Checkbox onChange={() => redirectToEditForm(user.email)}></InputGroup.Checkbox>
+                                <InputGroup.Checkbox
+                                    onChange={() =>
+                                        redirectToEditForm(user.email)
+                                    }
+                                ></InputGroup.Checkbox>
                             )}{" "}
-                            {!("age" in user) && <span className="title-checkbox">Edit User</span>}
+                            {!("age" in user) && (
+                                <span className='title-checkbox'>
+                                    Edit User
+                                </span>
+                            )}
                         </Card.Footer>
                     </Card>
                 ))}
             </ul>
+
+            {foundUser ? (
+                <Card key={`${email}-${Math.floor(Math.random() * email.length)}`} className='user-found mt-3' style={{ width: "18rem" }}>
+                    <Card.Body>
+                        <Card.Title>{foundUser.name}</Card.Title>
+                        <Card.Subtitle className='mb-2 text-muted'>
+                            {foundUser.email}
+                        </Card.Subtitle>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button
+                            variant='danger'
+                            onClick={() => deleteUser && deleteUser(foundUser)}
+                        >
+                            Delete
+                        </Button>{" "}
+                        <InputGroup.Checkbox
+                            onChange={() => redirectToEditForm(foundUser.email)}
+                        />{" "}
+                        <span className='title-checkbox'>Edit User</span>
+                    </Card.Footer>
+                </Card>
+            ) : (
+                email && <div>User not found for this email address</div>
+            )}
         </div>
     );
 };

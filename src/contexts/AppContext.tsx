@@ -18,7 +18,7 @@ type AppContextType = {
 
     editUser?: (email: string, updateUserdData: APIUserType) => void
 
-    // addUser?: () =>
+    searchUser?: (email: string) => APIUserType | null;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -60,9 +60,13 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         set("users", updatedUsers);
     }
 
+    const searchUser = (email: string) => {
+        return users.find(user => user.email === email ) || null;
+    }
+
     return (
         <AppContext.Provider
-            value={{ users, setUsers, createUser, deleteUser, editUser }}
+            value={{ users, setUsers, createUser, deleteUser, editUser, searchUser }}
         >
             {children}
         </AppContext.Provider>
