@@ -69,8 +69,6 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                 </Button>
             </InputGroup>
 
-            {/* <div className="user-not-found">{foundUser}</div> */}
-
             <ul ref={hideUsers}>
                 {users.map((user, index) => (
                     <Card
