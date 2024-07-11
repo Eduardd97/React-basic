@@ -58,6 +58,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                     placeholder="Enter the user's email address"
                     aria-label="Enter the user's email address"
                     aria-describedby='basic-addon2'
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                 />
                 <Button
