@@ -42,6 +42,10 @@ export const router = createBrowserRouter([
         element: <Users />,
     },
     {
+        path: "/users/:email",
+        element: <Users />,
+    },
+    {
         path: "/todos",
         element: <Todos />,
     },

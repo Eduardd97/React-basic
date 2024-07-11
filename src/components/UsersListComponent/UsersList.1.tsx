@@ -1,4 +1,4 @@
-import React, { FC, useContext, useRef, useState } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { APIUserType, UsersProps } from "../../types";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../contexts/AppContext";
@@ -20,24 +20,37 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
     //         UserIsNotFound.current.textContent = "User not found for this email address";
     //     }
     // }, []);
-
+    
     const [email, setEmail] = useState("");
     const [foundUser, setFoundUser] = useState<APIUserType | null>(null);
 
     const hideUsers = useRef<HTMLUListElement | null>(null);
+    const hideUser = useRef<HTMLDivElement | null>(null);
 
     const handleSearch = () => {
         if (searchUser) {
             const user = searchUser(email);
             setFoundUser(user);
-
             if (hideUsers.current) hideUsers.current.style.display = "none";
+
+            navigate(`/users/${email}`);
+            // if (hideUsers.current) hideUsers.current.style.display = "none";
         }
     };
+
+    useEffect(() => {
+        if (window.location.pathname === "/users") {
+            // При возврате к списку пользователей
+            if (hideUsers.current) hideUsers.current.style.display = "grid"; // Показываем список пользователей
+            if (hideUser.current) hideUser.current.style.display = "none";
+        }
+    }, [navigate]);
 
     const redirectToEditForm = (email: string) => {
         navigate(`/user-create/${email}`);
     };
+
+
 
     const divRef = useRef<HTMLDivElement | null>(null);
 
@@ -112,7 +125,12 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
             </ul>
 
             {foundUser ? (
-                <Card key={`${email}-${Math.floor(Math.random() * email.length)}`} className='user-found mt-3' style={{ width: "18rem" }}>
+                <Card
+                    key={`${email}-${Math.floor(Math.random() * email.length)}`}
+                    className='user-found mt-3'
+                    style={{ width: "18rem" }}
+                    ref={hideUser}
+                >
                     <Card.Body>
                         <Card.Title>{foundUser.name}</Card.Title>
                         <Card.Subtitle className='mb-2 text-muted'>

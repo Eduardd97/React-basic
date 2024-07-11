@@ -61,7 +61,11 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
     }
 
     const searchUser = (email: string) => {
-        return users.find(user => user.email === email ) || null;
+        const foundUser = users.find(user => user.email.includes(email) ) || null;
+
+        // navigate("/users");
+
+        return foundUser
     }
 
     return (
