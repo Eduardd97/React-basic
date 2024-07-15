@@ -5,8 +5,9 @@ import {
     createContext,
     useState,
 } from "react";
-import { APIUserType } from "../types";
+import { APIUserType, PostsType, TodosType } from "../types";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { posts, todos } from "../const";
 
 type AppContextType = {
     users: APIUserType[];
@@ -18,7 +19,11 @@ type AppContextType = {
 
     editUser?: (email: string, updateUserdData: APIUserType) => void
 
-    searchUser?: (email: string) => APIUserType | null;
+    searchUser?: (email: string, name: string) => APIUserType | null;
+
+    searchTodo?: (title: string, text: string) => TodosType | null;
+    
+    searchPost?: (title: string, body: string) => PostsType | null;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -60,17 +65,36 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
         set("users", updatedUsers);
     }
 
-    const searchUser = (email: string) => {
-        const foundUser = users.find(user => user.email.includes(email) ) || null;
+    // const searchUser = (email: string, name: string) => {
+    //     const foundUser = users.find(user => user.email.includes(email) ) || users.find(user => user.name.includes(name)) || null;
 
-        // navigate("/users");
+    //     return foundUser
+    // }
 
-        return foundUser
+    const searchUser = (email: string, name: string): APIUserType | null => {
+        const foundByEmail = email ? users.find(user => user.email.toLowerCase().includes(email.toLowerCase())) : null;
+        const foundByName = name ? users.find(user => user.name.toLowerCase().includes(name.toLowerCase())) : null;
+    
+        return foundByEmail || foundByName || null;
+    };
+
+    const searchTodo = (title: string, text: string): TodosType | null => {
+        const foundByTodoTitle = title ? todos.find(todo => todo.title.toLowerCase().includes(title.toLowerCase())) : null;
+        const foundByTodoText = text ? todos.find(todo => todo.text?.toLowerCase().includes(text.toLowerCase())) : null;
+
+        return foundByTodoTitle || foundByTodoText || null;
+    }
+
+    const searchPost = (title: string, body: string): PostsType | null => {
+        const foundByPostsTitle = title ? posts.find(post => post.title.toLowerCase().includes(title.toLowerCase())) : null;
+        const foundByPostsText = body ? posts.find(post => post.body.toLowerCase().includes(body.toLowerCase())) : null;
+
+        return foundByPostsTitle || foundByPostsText || null;
     }
 
     return (
         <AppContext.Provider
-            value={{ users, setUsers, createUser, deleteUser, editUser, searchUser }}
+            value={{ users, setUsers, createUser, deleteUser, editUser, searchUser, searchTodo, searchPost }}
         >
             {children}
         </AppContext.Provider>

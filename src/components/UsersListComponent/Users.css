@@ -54,3 +54,21 @@
     margin: 0 0 25px 0;
 } */
 
+.input-group-text{
+    width: 5rem;
+    position: relative;
+}
+
+.input-email {
+    position: absolute;
+    top: 8px;
+    left: 35px;
+}
+
+.input-name {
+    position: absolute;
+    top: 8px;
+    left: 112px;
+    z-index: 10;
+}
+

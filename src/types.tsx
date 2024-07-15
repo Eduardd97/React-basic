@@ -26,17 +26,27 @@ export type TodosType = {
     id: number;
     title: string;
     completed: boolean;
+    text?: string;
 };
-
-// export type ApiTodosType = {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   completed: boolean;
-// };
 
 export type TodosProps = {
     todos: TodosType[];
 };
 
 export type TodoVariationsType = "local" | "server";
+
+// --------------------- Posts ------------------ //
+
+export type PostsType = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string
+};
+
+export type PostsProps = {
+    posts: PostsType[];
+};
+
+export type PostVariationsType = "local" | "server";
+

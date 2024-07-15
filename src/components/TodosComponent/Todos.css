@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 320px;
 }
 
 .todos .todos-list .todo-card .card {
@@ -36,4 +37,22 @@
 
 .title-completed {
     background: tomato;
+}
+
+.input-group-text{
+    width: 5rem;
+    position: relative;
+}
+
+.input-title {
+    position: absolute;
+    top: 8px;
+    left: 35px;
+}
+
+.input-text {
+    position: absolute;
+    top: 8px;
+    left: 112px;
+    z-index: 10;
 }

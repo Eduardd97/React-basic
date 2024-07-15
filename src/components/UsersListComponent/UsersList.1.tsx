@@ -7,21 +7,13 @@ import "./MobileUsers.css";
 import { useNavigate } from "react-router-dom";
 
 export const UsersList: FC<UsersProps> = ({ users }) => {
-    // useEffect(() => {
-    //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    //     client
-    // }, [])
     const navigate = useNavigate();
-
     const { deleteUser, searchUser } = useContext(AppContext);
 
-    // useEffect(() => {
-    //     if (UserIsNotFound.current) {
-    //         UserIsNotFound.current.textContent = "User not found for this email address";
-    //     }
-    // }, []);
-    
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [searchByEmail, setSearchByEmail] = useState(false);
+    const [searchByName, setSearchByName] = useState(false);
     const [foundUser, setFoundUser] = useState<APIUserType | null>(null);
 
     const hideUsers = useRef<HTMLUListElement | null>(null);
@@ -29,19 +21,29 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
 
     const handleSearch = () => {
         if (searchUser) {
-            const user = searchUser(email);
+            let user: APIUserType | null = null;
+
+            if (searchByEmail && email) {
+                user = searchUser(email, "");
+                navigate(`/users/${email.toLowerCase()}`);
+            } else if (searchByName && name) {
+                user = searchUser("", name);
+                navigate(`/users/${name.split(' ').join('-').toLowerCase()}`);
+            } else {
+                user = searchUser(email, name);
+                navigate(`/users/${email.split(' ').join('-').toLowerCase() || name.split(' ').join('-').toLowerCase()}`);
+            }
+
             setFoundUser(user);
+
             if (hideUsers.current) hideUsers.current.style.display = "none";
 
-            navigate(`/users/${email}`);
-            // if (hideUsers.current) hideUsers.current.style.display = "none";
         }
     };
 
     useEffect(() => {
         if (window.location.pathname === "/users") {
-            // При возврате к списку пользователей
-            if (hideUsers.current) hideUsers.current.style.display = "grid"; // Показываем список пользователей
+            if (hideUsers.current) hideUsers.current.style.display = "grid";
             if (hideUser.current) hideUser.current.style.display = "none";
         }
     }, [navigate]);
@@ -50,29 +52,47 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
         navigate(`/user-create/${email}`);
     };
 
-
-
-    const divRef = useRef<HTMLDivElement | null>(null);
-
-    // const userDataRef = useRef({ name: "Eduard" });
-    // console.log(userDataRef, "userDataRef");
-
-    // console.log(divRef.current?.innerHTML, "divRef");
-
-    // const UserIsNotFound = useRef<HTMLDivElement | null>(null);
-    // // UserIsNotFound.current?.textContent = "a"
-
     return (
-        <div className='users-list' ref={divRef}>
+        <div className='users-list'>
             <h2>List of Users</h2>
 
             <InputGroup className='search-user-input mb-3'>
+                <InputGroup.Checkbox
+                    checked={searchByEmail}
+                    onChange={() => {
+                        setSearchByEmail(!searchByEmail);
+                        if (searchByName) setSearchByName(false);
+                    }}
+                    aria-label='Checkbox for searching by email'
+                />
+                <span className='input-email'>Email</span>
+                <InputGroup.Checkbox
+                    checked={searchByName}
+                    onChange={() => {
+                        setSearchByName(!searchByName);
+                        if (searchByEmail) setSearchByEmail(false);
+                    }}
+                    aria-label='Checkbox for searching by name'
+                />
+                <span className='input-name'>Name</span>
                 <Form.Control
-                    placeholder="Enter the user's email address"
-                    aria-label="Enter the user's email address"
+                    placeholder="Enter the user's email address or name"
+                    aria-label="Enter the user's email address or name"
                     aria-describedby='basic-addon2'
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    value={searchByEmail ? email : name}
+                    onChange={(event) => {
+                        if (searchByEmail) {
+                            setEmail(event.target.value);
+                        }
+                        if (searchByName) {
+                            setName(event.target.value);
+                        } else {
+                            // Устанавливаем оба значения, если ни один чекбокс не выбран
+                            setEmail(event.target.value);
+                            setName(event.target.value);
+                        }
+                    }}
+                    // disabled={!searchByEmail && !searchByName}
                 />
                 <Button
                     variant='outline-secondary'
@@ -100,20 +120,16 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                             {!("age" in user) && (
                                 <Button
                                     variant='danger'
-                                    onClick={() =>
-                                        deleteUser && deleteUser(user)
-                                    }
+                                    onClick={() => deleteUser && deleteUser(user)}
                                 >
                                     Delete
                                 </Button>
-                            )}{" "}
+                            )}
                             {!("age" in user) && (
                                 <InputGroup.Checkbox
-                                    onChange={() =>
-                                        redirectToEditForm(user.email)
-                                    }
-                                ></InputGroup.Checkbox>
-                            )}{" "}
+                                    onChange={() => redirectToEditForm(user.email)}
+                                />
+                            )}
                             {!("age" in user) && (
                                 <span className='title-checkbox'>
                                     Edit User
@@ -126,7 +142,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
 
             {foundUser ? (
                 <Card
-                    key={`${email}-${Math.floor(Math.random() * email.length)}`}
+                    key={foundUser.email}
                     className='user-found mt-3'
                     style={{ width: "18rem" }}
                     ref={hideUser}
@@ -151,7 +167,7 @@ export const UsersList: FC<UsersProps> = ({ users }) => {
                     </Card.Footer>
                 </Card>
             ) : (
-                email && <div>User not found for this email address</div>
+                (email || name) && <div>User not found for this email address or name</div>
             )}
         </div>
     );

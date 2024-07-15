@@ -7,7 +7,7 @@ import './Todos.css'
 import { Nav } from "react-bootstrap";
 
 export const Todos = () => {
-    const [todosType, setTodosType] = useState<TodoVariationsType>("local");
+    const [todosType, setTodosType] = useState<TodoVariationsType>("server");
     const todoTypes: TodoVariationsType[] = ["local", "server"];
 
     const [serverTodos, setServerTodos] = useState<TodosType[]>([]);
@@ -35,17 +35,7 @@ export const Todos = () => {
                     </Nav>
                 ))}
             </div>
-            {/* <nav>
-                {todoTypes.map((type) => (
-                    <button
-                        key={type}
-                        className={type === todosType ? "active-tab" : "tab"}
-                        onClick={() => changeTodosType(type)}
-                    >
-                        {type}
-                    </button>
-                ))}
-            </nav> */}
+
             <TodosList
                 todos={todosType === "local" ? todos : serverTodos.slice(0, 50)}
             />

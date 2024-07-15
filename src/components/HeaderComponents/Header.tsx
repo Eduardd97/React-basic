@@ -1,6 +1,6 @@
 import React from "react";
-import './Header.css'
-import './Mobile.css'
+import "./Header.css";
+import "./Mobile.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 export const Header = () => {
@@ -12,6 +12,7 @@ export const Header = () => {
         { title: "Users", path: "/users" },
         { title: "Todos", path: "/todos" },
         { title: "User Create", path: "/user-create" },
+        { title: "Posts List", path: "/posts" },
     ];
 
     return (

@@ -8,6 +8,7 @@ import { Users } from "./components/UsersListComponent/Users";
 import { Todos } from "./components/TodosComponent/Todos";
 import { UserForm } from "./components/UserFormComponent/UserForm";
 import { ImageCarousel } from "./components/CarouselComponent/ImageCarousel";
+import { Posts } from "./components/PostsComponent/Posts";
 
 export const router = createBrowserRouter([
     {
@@ -46,7 +47,19 @@ export const router = createBrowserRouter([
         element: <Users />,
     },
     {
+        path: "/users/:name",
+        element: <Users />,
+    },
+    {
         path: "/todos",
+        element: <Todos />,
+    },
+    {
+        path: "/todos/:title",
+        element: <Todos />,
+    },
+    {
+        path: "/todos/:text",
         element: <Todos />,
     },
     {
@@ -56,5 +69,17 @@ export const router = createBrowserRouter([
     {
         path: "/user-create/:email",
         element: <UserForm />,
+    },
+    {
+        path: "/posts",
+        element: <Posts />,
+    },
+    {
+        path: "/posts/:title",
+        element: <Posts />,
+    },
+    {
+        path: "/posts/:body",
+        element: <Posts />,
     },
 ]);
